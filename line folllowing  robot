@@ -1,0 +1,91 @@
+
+#include <stdio.h>
+#include <conio.h>
+#include <dos.h>
+void displayRobot(int x)
+{
+    textcolor(LIGHTCYAN);
+    gotoxy(x,10);
+    cprintf("  /----\\");
+    gotoxy(x,11);
+    cprintf(" | AUTO |");
+    gotoxy(x,12);
+    cprintf("  \\----/");
+    textcolor(YELLOW);
+    gotoxy(x,13);
+    cprintf(" O    O");
+    textcolor(LIGHTGREEN);
+    gotoxy(x+3,14);
+    cprintf("|");
+}
+void clearRobot(int x)
+{
+    int i;
+    for(i=10;i<=14;i++)
+    {
+        gotoxy(x,i);
+        cprintf("          ");
+    }
+}
+void main()
+{
+    int x,i;
+    clrscr();
+    textbackground(BLACK);
+    clrscr();
+    textcolor(YELLOW);
+    gotoxy(25,2);
+    cprintf("ADVANCED LINE FOLLOWER");
+    textcolor(LIGHTGREEN);
+    gotoxy(5,5);
+    cprintf("START");
+    gotoxy(68,5);
+    cprintf("FINISH");
+    textcolor(WHITE);
+    for(i=7;i<=19;i++)
+    {
+        gotoxy(5,i);
+        cprintf("|");
+        gotoxy(75,i);
+        cprintf("|");
+    }
+    textcolor(DARKGRAY);
+    for(i=7;i<=73;i+=3)
+    {
+        gotoxy(i,17);
+        cprintf(".");
+    }
+    textcolor(LIGHTCYAN);
+    gotoxy(20,22);
+    cprintf("SYSTEM: INITIALIZING...");
+    delay(1200);
+    for(x=8;x<=65;x++)
+    {
+        clearRobot(x-1);
+        displayRobot(x);
+        textcolor(LIGHTGREEN);
+        gotoxy(20,22);
+        cprintf("SYSTEM: LINE DETECTED     ");
+        if(x%2==0)
+        {
+            textcolor(YELLOW);
+            gotoxy(30,24);
+            cprintf("WHEELS: MOVING");
+        }
+        else
+        {
+            textcolor(LIGHTCYAN);
+            gotoxy(30,24);
+            cprintf("WHEELS: RUNNING");
+        }
+        delay(100);
+    }
+    textcolor(YELLOW);
+    gotoxy(20,22);
+    cprintf("SYSTEM: DESTINATION FOUND!");
+    textcolor(LIGHTGREEN);
+    gotoxy(29,25);
+    cprintf("ROBOT STOPPED SUCCESSFULLY");
+    getch();
+}
+
